@@ -18,14 +18,14 @@ cd resume_template
 3. 使用 XeLaTeX 编译：
 
 ```bash
-xelatex resume.tex
+xelatex main.tex
 ```
 也可以直接上传至 Overleaf 在线编辑和编译。
 
 
 ### 预览
 
-![简历预览](./image.png)
+![简历预览](./img.jpg)
 
 
 ## License
