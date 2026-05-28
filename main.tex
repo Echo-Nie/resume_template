@@ -1,0 +1,241 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8 Unicode
+% =========================================================
+% 开源单文件中文技术简历模板
+% 编译方式：XeLaTeX
+% 说明：本文件不依赖项目内自定义 cls/sty/字体目录；仅使用 TeX 发行版常见宏包。
+%       示例内容均为虚构信息，请按个人真实经历替换。
+% =========================================================
+
+\documentclass[10pt,a4paper]{article}
+
+% ---------- Page / packages ----------
+\usepackage[a4paper,left=1.35cm,right=1.35cm,top=1.00cm,bottom=1.05cm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fontawesome5}
+\usepackage{needspace}
+\usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
+
+% ---------- Fonts: robust fallbacks ----------
+\IfFontExistsTF{Times New Roman}{%
+  \setmainfont{Times New Roman}
+}{%
+  \IfFontExistsTF{Tinos}{\setmainfont{Tinos}}{\setmainfont{TeX Gyre Termes}}
+}
+\IfFontExistsTF{Noto Serif CJK SC}{%
+  \setCJKmainfont[BoldFont=Noto Serif CJK SC Bold]{Noto Serif CJK SC}
+  \setCJKsansfont[BoldFont=Noto Sans CJK SC Bold]{Noto Sans CJK SC}
+  \setCJKfamilyfont{resumehei}[BoldFont=Noto Sans CJK SC Bold]{Noto Sans CJK SC}
+  \setCJKfamilyfont{resumekai}[AutoFakeBold=1.2]{FandolKai-Regular.otf}
+}{%
+  \setCJKmainfont[AutoFakeBold=2.0]{FandolSong-Regular.otf}
+  \setCJKsansfont[AutoFakeBold=2.0]{FandolHei-Regular.otf}
+  \setCJKfamilyfont{resumehei}[AutoFakeBold=2.0]{FandolHei-Regular.otf}
+  \setCJKfamilyfont{resumekai}[AutoFakeBold=1.2]{FandolKai-Regular.otf}
+}
+\newcommand{\resumehei}{\CJKfamily{resumehei}}
+\newcommand{\resumekai}{\CJKfamily{resumekai}}
+
+% ---------- Colors ----------
+\definecolor{ResumeBlack}{RGB}{22,22,22}
+\definecolor{ResumeGray}{RGB}{92,92,92}
+\definecolor{LightGray}{RGB}{238,238,238}
+
+% ---------- Global layout ----------
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.02}
+\linespread{1.02}
+\emergencystretch=4em
+\hbadness=10000
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 0.8pt
+
+\setlist[itemize]{
+  leftmargin=1.45em,
+  labelsep=0.42em,
+  itemsep=1.2pt,
+  topsep=1.2pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+\setlist[enumerate]{
+  leftmargin=2.05em,
+  labelsep=0.42em,
+  itemsep=2pt,
+  topsep=2pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+% ---------- Components ----------
+\newcommand{\ResumeName}[1]{%
+  \begin{center}
+    {\fontsize{22pt}{25pt}\selectfont\bfseries #1}\par
+    \vspace{0.52em}
+  \end{center}
+}
+
+\newcommand{\ContactLine}{%
+  \begin{center}
+    {\fontsize{9.7pt}{11pt}\selectfont
+    \faPhone\enspace (+86)138-0000-0000
+    \hspace{2.0em}
+    \href{mailto:nienie@example.com}{\faEnvelope\enspace nienie@example.com}
+    \hspace{2.0em}
+    \href{https://github.com/}{\faGithub\enspace @nienie}}
+  \end{center}
+  \vspace{0.22em}
+}
+
+\newcommand{\ResumeSection}[2]{%
+  \Needspace{3.5\baselineskip}%
+  \vspace{0.68em}%
+  {\fontsize{13pt}{15pt}\selectfont\bfseries\textcolor{ResumeBlack}{#1\hspace{0.42em}{\resumehei #2}}}\par
+  \vspace{-0.28em}%
+  \noindent\rule{\linewidth}{0.55pt}\par
+  \vspace{0.28em}%
+}
+
+\newcommand{\DatedLine}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    #1 & {\textcolor{ResumeBlack}{#2}}
+  \end{tabularx}\par\vspace{-0.10em}%
+}
+
+\newcommand{\CompanyBlock}[3]{%
+  \Needspace{4\baselineskip}%
+  \vspace{0.18em}%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\bfseries #1}\quad{\resumekai\textcolor{ResumeGray}{#2}} & {\bfseries #3}
+  \end{tabularx}\par
+  \vspace{0.02em}%
+}
+
+\newcommand{\CompanySep}{%
+  \vspace{0.42em}%
+  \noindent\textcolor{LightGray}{\rule{\linewidth}{0.40pt}}\par
+  \vspace{0.36em}%
+}
+
+\newcommand{\ProjectTitle}[1]{%
+  \vspace{0.34em}%
+  \noindent{\bfseries #1}\par
+  \vspace{-0.14em}%
+}
+
+\newenvironment{ResumeBullets}{%
+  \begin{itemize}[
+    leftmargin=1.45em,
+    labelsep=0.42em,
+    itemsep=1.2pt,
+    topsep=1.1pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{itemize}\vspace{0.02em}
+}
+
+\newenvironment{InternBullets}{%
+  \fontsize{10.1pt}{12.35pt}\selectfont
+  \begin{itemize}[
+    leftmargin=1.45em,
+    labelsep=0.42em,
+    itemsep=2.2pt,
+    topsep=1.8pt,
+    parsep=0.6pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{itemize}\vspace{0.10em}
+}
+
+\newcommand{\ResearchSubTitle}[1]{%
+  \Needspace{3\baselineskip}%
+  \vspace{0.42em}%
+  \noindent{\bfseries\resumehei #1}\par
+  \vspace{-0.10em}%
+}
+
+\newcommand{\CoFirst}{\textsuperscript{\ensuremath{\dagger}}}
+\newcommand{\Corr}{\textsuperscript{\ensuremath{*}}}
+\newcommand{\PubLevel}[1]{\textbf{#1}}
+\newcommand{\PubStatus}[1]{\textit{#1}}
+
+\begin{document}
+\fontsize{10.1pt}{11.85pt}\selectfont
+
+\ResumeName{捏捏}
+\ContactLine
+
+\ResumeSection{\faGraduationCap}{\resumekai 教育背景}
+\DatedLine{\textbf{星河大学}，计算机科学与技术，{\resumekai 硕士研究生}}{2026.09 -- 2029.06}
+\DatedLine{\textbf{云岚大学}，软件工程，{\resumekai 工学学士}}{2022.09 -- 2026.06}
+\begin{ResumeBullets}
+  \item \textbf{学业表现：}专业排名 1/120，GPA 3.92/4.00；获校级一等奖学金、优秀学生干部、优秀毕业生等荣誉
+  \item \textbf{核心课程：}数据结构、操作系统、计算机网络、数据库系统、机器学习、分布式系统、编译原理
+  \item \textbf{英语能力：}CET-6；具备英文论文阅读、技术文档写作与跨团队技术沟通能力
+\end{ResumeBullets}
+
+\ResumeSection{\faBriefcase}{\resumekai 实习经历}
+
+\CompanyBlock{云脉科技 | CloudPulse Labs}{AI 基础设施研发实习}{2025.06 -- 2025.09}
+\ProjectTitle{\normalfont 大模型推理服务构建与性能优化}
+\begin{InternBullets}
+  \item \textbf{背景与问题：}团队内部多模型推理服务在模型加载、请求排队、日志追踪与灰度发布方面缺少统一流程，导致服务上线成本高、问题定位链路长、不同模型版本之间的性能差异难以稳定复现。
+  \item \textbf{工作与成果：}参与推理服务框架建设，协助实现模型配置管理、批量请求调度、推理日志采集与基础监控能力；整理多类压测场景并沉淀性能分析报告，帮助团队识别显存占用、首 token 延迟和并发吞吐等关键瓶颈，提升模型服务迭代效率。
+\end{InternBullets}
+
+\ProjectTitle{\normalfont 离线评测 Pipeline 与实验复现治理}
+\begin{InternBullets}
+  \item \textbf{背景与问题：}模型效果评估依赖分散脚本和人工汇总，存在数据版本不统一、评测指标口径不一致、实验结果难以追溯等问题，影响模型选型与上线决策效率。
+  \item \textbf{工作与成果：}参与搭建离线评测 pipeline，统一数据集组织、Prompt 模板管理、批量推理与结果聚合流程；协助完成多轮模型版本、参数配置和提示词策略对比实验，沉淀可复用评测模板与失败样例归因记录，降低后续实验复现成本。
+\end{InternBullets}
+
+\CompanySep
+
+\CompanyBlock{青竹智能 | BambooAI}{算法工程实习}{2024.10 -- 2025.01}
+\ProjectTitle{\normalfont 多场景文本生成质量评估与提示词优化}
+\begin{InternBullets}
+  \item \textbf{背景与问题：}业务侧文本生成需求覆盖摘要、问答、改写和结构化抽取等场景，不同场景对事实一致性、格式稳定性与响应风格要求差异较大，人工评估成本较高。
+  \item \textbf{工作与成果：}协助整理多类业务样例、构建评测规则与人工标注参考，参与 Prompt 模板迭代、坏例归因和生成结果对比分析；通过统一样例组织和评估口径，使模型效果讨论更加可复现，为后续模型选型和产品化落地提供依据。
+\end{InternBullets}
+
+% \clearpage
+
+\ResumeSection{\faGithub}{\resumekai 开源经历}
+\begin{ResumeBullets}
+  \item \textbf{工程规范实践：}熟悉 Git 协作、Issue/PR 流程、单元测试、CI 检查与代码 Review，能够在多人协作项目中保持稳定交付
+\end{ResumeBullets}
+
+\ResumeSection{\faTrophy}{\resumekai 竞赛获奖}
+\DatedLine{\textbf{全国大学生软件设计竞赛，}国家级一等奖}{2025.12}
+
+\ResumeSection{\faFile}{\resumekai 科研经历}
+\vspace{-0.34em}
+{\footnotesize\resumekai 注：\CoFirst{} 表示共同第一作者，\Corr{} 表示通讯作者；以下论文条目为模板示例。}\par
+
+\ResearchSubTitle{代表性科研成果}
+\begin{enumerate}[label={\normalfont[\arabic*]},series=pubs]
+  \item \textbf{Nienie}\CoFirst, Ming Chen\CoFirst, Rui Zhao, and Lan Xu\Corr.
+  Adaptive Context Routing for Efficient Multi-Agent Large Language Model Serving.
+  Submitted to \textit{International Conference on Machine Learning Systems}, 2026
+  （\PubLevel{ CCF-B}, \PubStatus{Under Review}）.
+\end{enumerate}
+
+\ResearchSubTitle{合作科研成果}
+\begin{enumerate}[label={\normalfont[\arabic*]},resume=pubs]
+  \item Yue Ma, Kai Huang, \textbf{Nienie}, and Zhen Liu\Corr.
+  Resource-Aware Model Deployment for Edge-Cloud Collaborative Intelligence.
+  In \textit{International Conference on Distributed Computing Systems}, 2025（\PubLevel{CCF-B}）.
+\end{enumerate}
+
+\end{document}
